@@ -1,0 +1,35 @@
+pipeline {
+    agent any
+    stages {
+        stage('git_clone') {
+            steps {
+                // Get some code from a GitHub repository
+                git url: 'https://github.com/ShailAdmin/MaventestCode.git', branch: 'master'
+                }
+        
+        }
+        stage('mvn_install') {
+            steps {
+                // Get some code from a GitHub repository
+               sh 'sudo yum update -y'    
+               sh 'sudo yum install maven -y'
+               sh 'mvn --version'
+                }
+        
+        }
+        stage('build') {
+            steps {
+                // Get some code from a GitHub repository
+               sh 'mvn validate'
+               sh 'mvn compile'
+               sh 'mvn test'
+               sh 'mvn package'
+               sh 'mvn verify'
+               sh 'mvn install'
+                }
+        
+        }
+    }   
+        
+    }
+
